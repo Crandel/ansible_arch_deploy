@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install ntp
+      pacman: name=ntp state=present
+    - name: Run ntp daemon
+      service: name=ntpd state=started enable=yes
