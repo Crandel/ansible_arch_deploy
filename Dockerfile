@@ -6,4 +6,5 @@ RUN pacman -Suy --noconfirm && \
                           python-pyopenssl \
                           openssh
 
+COPY configs/sshd_config /etc/ssh/sshd_config
 CMD sleep 1000000000d
