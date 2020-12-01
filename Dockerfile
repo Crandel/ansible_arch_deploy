@@ -1,10 +1,23 @@
 FROM archlinux:latest
 
+RUN ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime && \
+    mkdir -p /var/run/sshd && \
+    mkdir -p /root/.ssh
+
+COPY configs/docker_test.pub /root/.ssh/authorized_keys
+COPY configs/.bashrc /root/
+COPY configs/sshd_config     /etc/ssh/sshd_config
+RUN chmod 400                /root/.ssh/authorized_keys
+
 RUN pacman -Suy --noconfirm && \
     pacman -S --noconfirm python \
                           python-pip \
                           python-pyopenssl \
-                          openssh
+                          openssh \
+                          net-tools \
+                          openbsd-netcat
 
-COPY configs/sshd_config /etc/ssh/sshd_config
-CMD sleep 1000000000d
+RUN ssh-keygen -A
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]

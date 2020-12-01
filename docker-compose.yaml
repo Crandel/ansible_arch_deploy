@@ -1,0 +1,19 @@
+version: '3'
+services:
+  server1:
+    build: .
+    image: server:img
+    hostname: server1.test
+    ports:
+      - "2224:22"
+  server2:
+    image: server:img
+    hostname: server2.test
+    ports:
+      - "2225:22"
+
+  server3:
+    image: server:img
+    hostname: server2.test
+    ports:
+      - "2226:22"
