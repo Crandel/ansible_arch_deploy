@@ -14,6 +14,6 @@ services:
 
   server3:
     image: server:img
-    hostname: server2.test
+    hostname: server3.test
     ports:
       - "2226:22"

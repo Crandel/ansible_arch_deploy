@@ -13,9 +13,7 @@ RUN pacman -Suy --noconfirm && \
     pacman -S --noconfirm python \
                           python-pip \
                           python-pyopenssl \
-                          openssh \
-                          net-tools \
-                          openbsd-netcat
+                          openssh
 
 RUN ssh-keygen -A
 EXPOSE 22
