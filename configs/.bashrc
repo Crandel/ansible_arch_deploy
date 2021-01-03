@@ -532,7 +532,7 @@ clean_pyc (){
 ### Determine active Python virtualenv details.
 function set_virtualenv () {
   if [ ! -z "$VIRTUAL_ENV" ] ; then
-    echo " %F{yellow}[`basename \"$VIRTUAL_ENV\"`]"
+    PYTHON_VIRTUALENV=" %YELLOW[`basename \"$VIRTUAL_ENV\"`]%NORMAL"
   fi
 }
 ## END PYTHON
@@ -671,7 +671,8 @@ function set_bash_prompt () {
   fi
 
   # Set the bash prompt variable.
-  PS1="${BLUE}╭─\A${NORMAL}${PYTHON_VIRTUALENV} ${USERCOLOR}\u${NORMAL} ${PURPLE}{\w}${NORMAL}${BRANCH}${P_SYMBOL}"
+  [[ $SSH_CONNECTION ]] && local uath='${WHITE}@\h${NORMAL}'
+  PS1="${BLUE}╭─\A${NORMAL}${PYTHON_VIRTUALENV} ${USERCOLOR}\u${NORMAL}${uath} ${PURPLE}{\w}${NORMAL}${BRANCH}${P_SYMBOL}"
 }
 
 # Tell bash to execute this function just before displaying its prompt.
